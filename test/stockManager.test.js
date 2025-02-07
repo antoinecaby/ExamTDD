@@ -54,3 +54,5 @@ describe("Suppression d'article du stock", () => {
   
     // TODO : comportement attendu quand on supprime la totalité du stock
   });
+
+  

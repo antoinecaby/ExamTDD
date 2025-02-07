@@ -19,4 +19,20 @@ function getStock(stock, item) {
     return stock[item];
 } 
 
-module.exports = { addStock, getStock };
+function removeStock(stock, item, quantity) {
+    if (quantity < 0) {
+        throw new Error("Quantité invalide");
+    }
+    
+    if (stock[item] === undefined) {
+        throw new Error("Article inexistant");
+    }
+    
+    if (stock[item] < quantity) {
+        throw new Error("Quantité insuffisante");
+    }
+    
+    stock[item] -= quantity;
+}
+
+module.exports = { addStock, getStock, removeStock };
