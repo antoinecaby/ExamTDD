@@ -9,11 +9,13 @@ describe("Ajout d'article", () => {
 
   test("Ajout d'un nombre négalif d'article existant doit retourner une erreur", () => {
     const stock = { "Chaise": 5 };
-    expect(() => addStock(stock, "Chaise", -3)).toThrow("Quantité invalide");
+    addStock(stock, "Chaise", -3);
+    expect(getStock(stock, "Chaise")).toThrow("Quantité invalide");
   });
 
   test("Tenter d'ajouter un article inexistant doit générer une erreur", () => {
     const stock = { "Chaise": 5 };
-    expect(() => addStock(stock, "Table", 3)).toThrow("Article inexistant");
+    addStock(stock, "Table", 3);
+    expect(getStock(stock, "Table")).toThrow("Article inexistant");
   });
 });
