@@ -35,4 +35,15 @@ function removeStock(stock, item, quantity) {
     stock[item] -= quantity;
 }
 
-module.exports = { addStock, getStock, removeStock };
+function getStockReport(stock) {
+    if (Object.keys(stock).length === 0) {
+      return "Le stock est vide";
+    }
+  
+    let report = "Stock actuel:\n";
+    return report + Object.entries(stock)
+      .map(([item, quantity]) => `- ${item}: ${quantity}`)
+      .join("\n");
+  }
+  
+module.exports = { addStock, getStock, removeStock, getStockReport };

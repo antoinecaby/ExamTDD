@@ -1,4 +1,4 @@
-const { addStock, getStock, removeStock } = require("../src/stockManager");
+const { addStock, getStock, removeStock, getStockReport } = require("../src/stockManager");
 
 describe("Ajout d'article", () => {
   test("Ajout d'un nombre valide d'article existant", () => {
@@ -55,7 +55,7 @@ describe("Suppression d'article du stock", () => {
     // TODO : comportement attendu quand on supprime la totalité du stock
   });
 
-  describe("Obtenir le rapport des stcoks", () => {
+  describe("Obtenir le rapport des stocks", () => {
     test("Génère un rapport quand le stock contient des articles", () => {
       const stock = { "Chaise": 5, "Table": 3 };
       expect(getStockReport(stock)).toBe("Stock actuel:\n- Chaise: 5\n- Table: 3");
