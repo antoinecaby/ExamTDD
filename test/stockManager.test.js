@@ -17,3 +17,15 @@ describe("Ajout d'article", () => {
     expect(() => addStock(stock, "Table", 3)).toThrow("Article inexistant");
   });
 });
+
+describe("Consultation d'article dans le stock", () => {
+  test("Consulter un article qui existe", () => {
+    const stock = { "Chaise": 5 };
+    expect(getStock(stock, "Chaise")).toBe(5);
+  });
+
+  test("Consulter un article non existant doit générer une erreur", () => {
+    const stock = { "Chaise": 5 };
+    expect(() => getStock(stock, "Table")).toThrow("Article inexistant");
+  });
+});
