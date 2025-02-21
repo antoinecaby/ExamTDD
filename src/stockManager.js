@@ -1,33 +1,24 @@
 function addStock(stock, item, quantity) {
-    // TODO : demander quel retour pour une quantité = 0
     if (quantity < 0) {
         throw new Error("Quantité invalide");
     }
     
-    if (stock[item] === undefined) {
-        throw new Error("Article inexistant");
-    }
-    
+    _checkItemExists(stock, item);
     stock[item] += quantity;
 }
 
 function getStock(stock, item) {
-    if (stock[item] === undefined) {
-        throw new Error("Article inexistant");
-    }
-    
+    _checkItemExists(stock, item);
     return stock[item];
-} 
+}
 
 function removeStock(stock, item, quantity) {
     if (quantity < 0) {
         throw new Error("Quantité invalide");
     }
     
-    if (stock[item] === undefined) {
-        throw new Error("Article inexistant");
-    }
-    
+    _checkItemExists(stock, item);
+
     if (stock[item] < quantity) {
         throw new Error("Quantité insuffisante");
     }
@@ -50,6 +41,12 @@ function getStockReport(stock) {
     return report + Object.entries(stock)
       .map(([item, quantity]) => `- ${item}: ${quantity}`)
       .join("\n");
-  }
+}
+
+function _checkItemExists(stock, item) {
+    if (!stock.hasOwnProperty(item)) {
+        throw new Error("Article inexistant");
+    }
+}
   
-module.exports = { addStock, getStock, removeStock, getStockReport };
+module.exports = { addStock, getStock, removeStock, getStockReport, _checkItemExists };
