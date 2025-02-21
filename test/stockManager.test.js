@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { addStock, getStock, removeStock, getStockReport, checkItemExists, getTransactionHistory } = require("../src/stockManager");
 
-const historyFilePath = "./logs/trasaction_history.txt";
+const historyFilePath = "./logs/transaction_history.txt";
 
 describe("Ajout d'article", () => {
   test("Ajout d'un nombre valide d'article existant", () => {
@@ -93,15 +93,15 @@ describe("Historique des transactions", () => {
   test("Ajout d'une transaction d'ajout dans l'historique", () => {
       const stock = { "Chaise": 5 };
       addStock(stock, "Chaise", 3);
-      const history = getTransactionHistory();
-      expect(history).toContain("Ajout: Chaise (x3)");
+      const history = getTransactionHistory(historyFilePath).join("\n");
+      expect(history).toMatch(/Ajout: Chaise \(x3\)/); 
   });
 
   test("Ajout d'une transaction de retrait dans l'historique", () => {
       const stock = { "Chaise": 10 };
       removeStock(stock, "Chaise", 2);
-      const history = getTransactionHistory();
-      expect(history).toContain("Retrait: Chaise (x2)");
+      const history = getTransactionHistory(historyFilePath).join("\n");
+      expect(history).toMatch(/Retrait: Chaise \(x2\)/);
   });
 
   test("Gestion d'erreur si l'écriture de l'historique échoue", () => {

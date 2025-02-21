@@ -60,9 +60,13 @@ function logTransaction(type, item, quantity) {
     }
 }
 
-function getTransactionHistory() {
-    if (!fs.existsSync(path)) return [];
-    return fs.readFileSync(path, "utf-8").split("\n").filter(line => line.trim() !== "");
+function getTransactionHistory(filePath = "./logs/transaction_history.txt") {
+    if (!fs.existsSync(filePath)) return [];
+    return fs
+        .readFileSync(filePath, "utf-8")
+        .split("\n")
+        .filter(line => line.trim() !== "")
+        .map(line => line.replace(/^[^\-]+ - /, "")); 
 }
   
 module.exports = { addStock, getStock, removeStock, getStockReport, checkItemExists, getTransactionHistory };
