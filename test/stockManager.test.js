@@ -1,4 +1,7 @@
-const { addStock, getStock, removeStock, getStockReport } = require("../src/stockManager");
+const fs = require("fs");
+const { addStock, getStock, removeStock, getStockReport, checkItemExists, getTransactionHistory } = require("../src/stockManager");
+
+const historyFilePath = "./logs/trasaction_history.txt";
 
 describe("Ajout d'article", () => {
   test("Ajout d'un nombre valide d'article existant", () => {
@@ -68,15 +71,49 @@ describe("Suppression d'article du stock", () => {
     });
   });
 
-  describe("Obtenir le rapport des stocks", () => {
-    test("Génère un rapport quand le stock contient des articles", () => {
-      const stock = { "Chaise": 5, "Table": 3 };
-      expect(getStockReport(stock)).toBe("Stock actuel:\n- Chaise: 5\n- Table: 3");
-    });
+describe("Obtenir le rapport des stocks", () => {
+  test("Génère un rapport quand le stock contient des articles", () => {
+    const stock = { "Chaise": 5, "Table": 3 };
+    expect(getStockReport(stock)).toBe("Stock actuel:\n- Chaise: 5\n- Table: 3");
+  });
 
-    test("Génère un rapport vide quand le stock est vide", () => {
-      const stock = {};
-      expect(getStockReport(stock)).toBe("Le stock est vide");
-    });
+  test("Génère un rapport vide quand le stock est vide", () => {
+    const stock = {};
+    expect(getStockReport(stock)).toBe("Le stock est vide");
+  });
+});
+
+describe("Historique des transactions", () => {
+  beforeEach(() => {
+      if (fs.existsSync(historyFilePath)) {
+          fs.unlinkSync(historyFilePath);
+      }
+  });
+
+  test("Ajout d'une transaction d'ajout dans l'historique", () => {
+      const stock = { "Chaise": 5 };
+      addStock(stock, "Chaise", 3);
+      const history = getTransactionHistory();
+      expect(history).toContain("Ajout: Chaise (x3)");
+  });
+
+  test("Ajout d'une transaction de retrait dans l'historique", () => {
+      const stock = { "Chaise": 10 };
+      removeStock(stock, "Chaise", 2);
+      const history = getTransactionHistory();
+      expect(history).toContain("Retrait: Chaise (x2)");
+  });
+
+  test("Gestion d'erreur si l'écriture de l'historique échoue", () => {
+      jest.spyOn(fs, "appendFileSync").mockImplementation(() => {
+          throw new Error("Erreur d'écriture");
+      });
+
+      const stock = { "Chaise": 5 };
+      expect(() => addStock(stock, "Chaise", 2)).not.toThrow();
+      expect(() => removeStock(stock, "Chaise", 1)).not.toThrow();
+
+      fs.appendFileSync.mockRestore();
+  });
 });
 
