@@ -1,4 +1,4 @@
-const { addStock, getStock, removeStock, getStockReport, _checkItemExists } = require("../src/stockManager");
+const { addStock, getStock, removeStock, getStockReport } = require("../src/stockManager");
 
 describe("Ajout d'article", () => {
   test("Ajout d'un nombre valide d'article existant", () => {
