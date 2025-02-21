@@ -1,6 +1,6 @@
 # User Stories - Gestionnaire de Stock
 
-### 1. Gestion des Ajouts d'Articles
+## 1. Gestion des Ajouts d'Articles
 
 - **En tant que** gestionnaire de stock  
   **Je veux** ajouter un nombre valide d'articles existants au stock  
@@ -14,9 +14,17 @@
   **Je veux** empêcher l'ajout d'un article inexistant  
   **Afin de** m'assurer que seuls les articles enregistrés soient modifiés.
 
+- **En tant que** gestionnaire de stock  
+  **Je veux** que chaque ajout d'article soit enregistré dans un historique horodaté  
+  **Afin de** pouvoir retracer les entrées de stock.
+
+- **En tant que** gestionnaire de stock  
+  **Je veux** être averti si l'enregistrement d'une transaction d'ajout échoue  
+  **Afin de** savoir que l'ajout a bien eu lieu malgré l'erreur d'historique.
+
 ---
 
-### 2. Consultation du Stock
+## 2. Consultation du Stock
 
 - **En tant que** utilisateur  
   **Je veux** consulter la quantité d'un article existant  
@@ -28,7 +36,7 @@
 
 ---
 
-### 3. Suppression d'Articles
+## 3. Suppression d'Articles
 
 - **En tant que** gestionnaire de stock  
   **Je veux** retirer une quantité valide d'articles du stock  
@@ -54,9 +62,17 @@
   **Je veux** être averti si le stock d'un article est vide  
   **Afin de** éviter toute rupture non signalée.
 
+- **En tant que** gestionnaire de stock  
+  **Je veux** que chaque retrait d'article soit enregistré dans un historique horodaté  
+  **Afin de** pouvoir retracer les sorties de stock.
+
+- **En tant que** gestionnaire de stock  
+  **Je veux** être averti si l'enregistrement d'une transaction de retrait échoue  
+  **Afin de** savoir que le retrait a bien eu lieu malgré l'erreur d'historique.
+
 ---
 
-### 4. Rapport des Stocks
+## 4. Rapport des Stocks
 
 - **En tant que** gestionnaire de stock  
   **Je veux** générer un rapport des articles en stock  
@@ -65,3 +81,19 @@
 - **En tant que** gestionnaire de stock  
   **Je veux** un message spécifique si le stock est vide  
   **Afin de** savoir immédiatement qu'il n'y a plus d'articles en inventaire.
+
+---
+
+## 5. Historique des Transactions
+
+- **En tant que** gestionnaire de stock  
+  **Je veux** pouvoir consulter un historique détaillé des transactions  
+  **Afin de** retracer toutes les entrées et sorties d'articles.
+
+- **En tant que** gestionnaire de stock  
+  **Je veux** que chaque transaction indique la date, l’article et la quantité  
+  **Afin de** comprendre le contexte exact de chaque mouvement de stock.
+
+- **En tant que** gestionnaire de stock  
+  **Je veux** pouvoir vider l'historique si nécessaire  
+  **Afin de** nettoyer les données obsolètes.
