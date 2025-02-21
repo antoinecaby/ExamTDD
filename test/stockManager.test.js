@@ -51,8 +51,21 @@ describe("Suppression d'article du stock", () => {
       const stock = { "Chaise": 5 };
       expect(() => removeStock(stock, "Chaise", 6)).toThrow("Quantité insuffisante");
     });
-  
-    // TODO : comportement attendu quand on supprime la totalité du stock
+
+    test("Avertir l'utilisateur quand le stock est inférieur à 5", () => {
+        const stock = { "Chaise": 3 };
+        removeStock(stock, "Chaise", 1);
+        expect(getStock(stock, "Chaise")).toBe(2);
+        expect(console.log).toHaveBeenCalledWith("Attention, il ne reste que 2 chaises en stock !");
+    });
+
+    test("Avertir l'utilisateur quand le stock est vide", () => {
+        const stock = { "Chaise": 1 };
+        removeStock(stock, "Chaise", 1);
+        expect(getStock(stock, "Chaise")).toBe(0);
+        expect(console.log).toHaveBeenCalledWith("Attention, le stock de chaises est vide !");
+    });
+
   });
 
   describe("Obtenir le rapport des stocks", () => {
@@ -66,3 +79,4 @@ describe("Suppression d'article du stock", () => {
       expect(getStockReport(stock)).toBe("Le stock est vide");
     });
 });
+
