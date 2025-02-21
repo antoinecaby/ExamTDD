@@ -54,17 +54,18 @@ describe("Suppression d'article du stock", () => {
 
     test("Avertir l'utilisateur quand le stock est inférieur à 5", () => {
       const stock = { "Chaise": 3 };
-      expect(() => removeStock(stock, "Chaise", 1)).toThrow("Attention, il ne reste que 2 chaises en stock !");
+      const message = removeStock(stock, "Chaise", 1);
+      expect(message).toBe("Attention, il ne reste que 2 chaises en stock !");
       expect(getStock(stock, "Chaise")).toBe(2);
-    });
+  });
+  
     
     test("Avertir l'utilisateur quand le stock est vide", () => {
-        const stock = { "Chaise": 1 };
-        expect(() => removeStock(stock, "Chaise", 1)).toThrow("Attention, le stock de chaises est vide !");
-        expect(getStock(stock, "Chaise")).toBe(0);
+      const stock = { "Chaise": 1 };
+      const message = removeStock(stock, "Chaise", 1);
+      expect(message).toBe("Attention, le stock de chaises est vide !");
+      expect(getStock(stock, "Chaise")).toBe(0);
     });
-  
-
   });
 
   describe("Obtenir le rapport des stocks", () => {

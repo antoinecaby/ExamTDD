@@ -33,6 +33,12 @@ function removeStock(stock, item, quantity) {
     }
     
     stock[item] -= quantity;
+
+    if (stock[item] === 0) {
+        return `Attention, le stock de ${item.toLowerCase()}s est vide !`;
+    } else if (stock[item] < 5) {
+        return `Attention, il ne reste que ${stock[item]} ${item.toLowerCase()}${stock[item] > 1 ? 's' : ''} en stock !`;
+    }
 }
 
 function getStockReport(stock) {
